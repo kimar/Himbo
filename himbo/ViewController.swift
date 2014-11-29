@@ -85,12 +85,27 @@ class ViewController: UIViewController {
     }
     
     func doubleTap(gestureRecognizer: UITapGestureRecognizer) {
+        
+        if !checkAssetsAuthorization() {
+            UIAlertView(title: "Error", message: "Please go into your Device's Settings and allow Album Access for himbo. This App will only save the current Wallpaper to your Albums. No Access to this or other Photos is gained.", delegate: nil, cancelButtonTitle: "OK").show()
+            return
+        }
+        
         flashView.alpha = 1.0
         UIView.animateWithDuration(0.3, animations: { () -> Void in
             self.flashView.alpha = 0.0
             }, completion: { (completed: Bool) -> Void in
-            self.saveToLibrary()
+                self.saveToLibrary()
         })
+    }
+    
+    func checkAssetsAuthorization() -> Bool {
+        let status = ALAssetsLibrary.authorizationStatus()
+        if status != ALAuthorizationStatus.Authorized {
+            self.view.shake(10, direction: ShakeDirection.Horizontal)
+            return false
+        }
+        return true
     }
     
     private func saveToLibrary() {
@@ -101,7 +116,7 @@ class ViewController: UIViewController {
         let image = imageWithColor(rect, color: self.view.backgroundColor!)
         ALAssetsLibrary().writeImageToSavedPhotosAlbum(image.CGImage, orientation: ALAssetOrientation.Up) { (path: NSURL!, error: NSError!) -> Void in
             if error != nil {
-                UIAlertView(title: "Error", message: "The Photo could not be saved.", delegate: nil, cancelButtonTitle: "OK")
+                UIAlertView(title: "Error", message: "The Photo could not be saved.", delegate: nil, cancelButtonTitle: "OK").show()
             }
         }
     }
