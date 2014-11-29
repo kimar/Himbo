@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:Colorig.xcodeproj">
+      location = "self:himbo.xcodeproj">
    </FileRef>
 </Workspace>

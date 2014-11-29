@@ -7,12 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		EC1AEC691A1C6B4A00D1FA48 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1AEC681A1C6B4A00D1FA48 /* AppDelegate.swift */; };
-		EC1AEC6B1A1C6B4A00D1FA48 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1AEC6A1A1C6B4A00D1FA48 /* ViewController.swift */; };
-		EC1AEC6E1A1C6B4A00D1FA48 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC1AEC6C1A1C6B4A00D1FA48 /* Main.storyboard */; };
-		EC1AEC701A1C6B4A00D1FA48 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EC1AEC6F1A1C6B4A00D1FA48 /* Images.xcassets */; };
-		EC1AEC731A1C6B4A00D1FA48 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = EC1AEC711A1C6B4A00D1FA48 /* LaunchScreen.xib */; };
-		EC1AEC7F1A1C6B4A00D1FA48 /* ColorigTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1AEC7E1A1C6B4A00D1FA48 /* ColorigTests.swift */; };
+		EC6165521A295B9800658455 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC6165511A295B9800658455 /* AssetsLibrary.framework */; };
+		EC61658A1A29B76B00658455 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6165821A29B76B00658455 /* AppDelegate.swift */; };
+		EC61658B1A29B76B00658455 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = EC6165831A29B76B00658455 /* LaunchScreen.xib */; };
+		EC61658C1A29B76B00658455 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC6165851A29B76B00658455 /* Main.storyboard */; };
+		EC61658D1A29B76B00658455 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EC6165871A29B76B00658455 /* Images.xcassets */; };
+		EC61658F1A29B76B00658455 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6165891A29B76B00658455 /* ViewController.swift */; };
+		EC6165931A29B77000658455 /* ColorigTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6165911A29B77000658455 /* ColorigTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -26,16 +27,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		EC1AEC631A1C6B4A00D1FA48 /* Colorig.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Colorig.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		EC1AEC671A1C6B4A00D1FA48 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		EC1AEC681A1C6B4A00D1FA48 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		EC1AEC6A1A1C6B4A00D1FA48 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		EC1AEC6D1A1C6B4A00D1FA48 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		EC1AEC6F1A1C6B4A00D1FA48 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		EC1AEC721A1C6B4A00D1FA48 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		EC1AEC781A1C6B4A00D1FA48 /* ColorigTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ColorigTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		EC1AEC7D1A1C6B4A00D1FA48 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		EC1AEC7E1A1C6B4A00D1FA48 /* ColorigTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorigTests.swift; sourceTree = "<group>"; };
+		EC1AEC631A1C6B4A00D1FA48 /* himbo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = himbo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EC1AEC781A1C6B4A00D1FA48 /* himboTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = himboTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		EC6165511A295B9800658455 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		EC6165821A29B76B00658455 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		EC6165841A29B76B00658455 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		EC6165861A29B76B00658455 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		EC6165871A29B76B00658455 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		EC6165881A29B76B00658455 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EC6165891A29B76B00658455 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		EC6165911A29B77000658455 /* ColorigTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorigTests.swift; sourceTree = "<group>"; };
+		EC6165921A29B77000658455 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +45,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EC6165521A295B9800658455 /* AssetsLibrary.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,8 +62,9 @@
 		EC1AEC5A1A1C6B4A00D1FA48 = {
 			isa = PBXGroup;
 			children = (
-				EC1AEC651A1C6B4A00D1FA48 /* Colorig */,
-				EC1AEC7B1A1C6B4A00D1FA48 /* ColorigTests */,
+				EC6165511A295B9800658455 /* AssetsLibrary.framework */,
+				EC6165811A29B76B00658455 /* himbo */,
+				EC6165901A29B77000658455 /* himboTests */,
 				EC1AEC641A1C6B4A00D1FA48 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -68,56 +72,40 @@
 		EC1AEC641A1C6B4A00D1FA48 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				EC1AEC631A1C6B4A00D1FA48 /* Colorig.app */,
-				EC1AEC781A1C6B4A00D1FA48 /* ColorigTests.xctest */,
+				EC1AEC631A1C6B4A00D1FA48 /* himbo.app */,
+				EC1AEC781A1C6B4A00D1FA48 /* himboTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		EC1AEC651A1C6B4A00D1FA48 /* Colorig */ = {
+		EC6165811A29B76B00658455 /* himbo */ = {
 			isa = PBXGroup;
 			children = (
-				EC1AEC681A1C6B4A00D1FA48 /* AppDelegate.swift */,
-				EC1AEC6A1A1C6B4A00D1FA48 /* ViewController.swift */,
-				EC1AEC6C1A1C6B4A00D1FA48 /* Main.storyboard */,
-				EC1AEC6F1A1C6B4A00D1FA48 /* Images.xcassets */,
-				EC1AEC711A1C6B4A00D1FA48 /* LaunchScreen.xib */,
-				EC1AEC661A1C6B4A00D1FA48 /* Supporting Files */,
+				EC6165821A29B76B00658455 /* AppDelegate.swift */,
+				EC6165831A29B76B00658455 /* LaunchScreen.xib */,
+				EC6165851A29B76B00658455 /* Main.storyboard */,
+				EC6165871A29B76B00658455 /* Images.xcassets */,
+				EC6165881A29B76B00658455 /* Info.plist */,
+				EC6165891A29B76B00658455 /* ViewController.swift */,
 			);
-			path = Colorig;
+			path = himbo;
 			sourceTree = "<group>";
 		};
-		EC1AEC661A1C6B4A00D1FA48 /* Supporting Files */ = {
+		EC6165901A29B77000658455 /* himboTests */ = {
 			isa = PBXGroup;
 			children = (
-				EC1AEC671A1C6B4A00D1FA48 /* Info.plist */,
+				EC6165911A29B77000658455 /* ColorigTests.swift */,
+				EC6165921A29B77000658455 /* Info.plist */,
 			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		EC1AEC7B1A1C6B4A00D1FA48 /* ColorigTests */ = {
-			isa = PBXGroup;
-			children = (
-				EC1AEC7E1A1C6B4A00D1FA48 /* ColorigTests.swift */,
-				EC1AEC7C1A1C6B4A00D1FA48 /* Supporting Files */,
-			);
-			path = ColorigTests;
-			sourceTree = "<group>";
-		};
-		EC1AEC7C1A1C6B4A00D1FA48 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				EC1AEC7D1A1C6B4A00D1FA48 /* Info.plist */,
-			);
-			name = "Supporting Files";
+			path = himboTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		EC1AEC621A1C6B4A00D1FA48 /* Colorig */ = {
+		EC1AEC621A1C6B4A00D1FA48 /* himbo */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = EC1AEC821A1C6B4A00D1FA48 /* Build configuration list for PBXNativeTarget "Colorig" */;
+			buildConfigurationList = EC1AEC821A1C6B4A00D1FA48 /* Build configuration list for PBXNativeTarget "himbo" */;
 			buildPhases = (
 				EC1AEC5F1A1C6B4A00D1FA48 /* Sources */,
 				EC1AEC601A1C6B4A00D1FA48 /* Frameworks */,
@@ -127,14 +115,14 @@
 			);
 			dependencies = (
 			);
-			name = Colorig;
+			name = himbo;
 			productName = Colorig;
-			productReference = EC1AEC631A1C6B4A00D1FA48 /* Colorig.app */;
+			productReference = EC1AEC631A1C6B4A00D1FA48 /* himbo.app */;
 			productType = "com.apple.product-type.application";
 		};
-		EC1AEC771A1C6B4A00D1FA48 /* ColorigTests */ = {
+		EC1AEC771A1C6B4A00D1FA48 /* himboTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = EC1AEC851A1C6B4A00D1FA48 /* Build configuration list for PBXNativeTarget "ColorigTests" */;
+			buildConfigurationList = EC1AEC851A1C6B4A00D1FA48 /* Build configuration list for PBXNativeTarget "himboTests" */;
 			buildPhases = (
 				EC1AEC741A1C6B4A00D1FA48 /* Sources */,
 				EC1AEC751A1C6B4A00D1FA48 /* Frameworks */,
@@ -145,9 +133,9 @@
 			dependencies = (
 				EC1AEC7A1A1C6B4A00D1FA48 /* PBXTargetDependency */,
 			);
-			name = ColorigTests;
+			name = himboTests;
 			productName = ColorigTests;
-			productReference = EC1AEC781A1C6B4A00D1FA48 /* ColorigTests.xctest */;
+			productReference = EC1AEC781A1C6B4A00D1FA48 /* himboTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -168,7 +156,7 @@
 					};
 				};
 			};
-			buildConfigurationList = EC1AEC5E1A1C6B4A00D1FA48 /* Build configuration list for PBXProject "Colorig" */;
+			buildConfigurationList = EC1AEC5E1A1C6B4A00D1FA48 /* Build configuration list for PBXProject "himbo" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -181,8 +169,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				EC1AEC621A1C6B4A00D1FA48 /* Colorig */,
-				EC1AEC771A1C6B4A00D1FA48 /* ColorigTests */,
+				EC1AEC621A1C6B4A00D1FA48 /* himbo */,
+				EC1AEC771A1C6B4A00D1FA48 /* himboTests */,
 			);
 		};
 /* End PBXProject section */
@@ -192,9 +180,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EC1AEC6E1A1C6B4A00D1FA48 /* Main.storyboard in Resources */,
-				EC1AEC731A1C6B4A00D1FA48 /* LaunchScreen.xib in Resources */,
-				EC1AEC701A1C6B4A00D1FA48 /* Images.xcassets in Resources */,
+				EC61658D1A29B76B00658455 /* Images.xcassets in Resources */,
+				EC61658B1A29B76B00658455 /* LaunchScreen.xib in Resources */,
+				EC61658C1A29B76B00658455 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -212,8 +200,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EC1AEC6B1A1C6B4A00D1FA48 /* ViewController.swift in Sources */,
-				EC1AEC691A1C6B4A00D1FA48 /* AppDelegate.swift in Sources */,
+				EC61658F1A29B76B00658455 /* ViewController.swift in Sources */,
+				EC61658A1A29B76B00658455 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -221,7 +209,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EC1AEC7F1A1C6B4A00D1FA48 /* ColorigTests.swift in Sources */,
+				EC6165931A29B77000658455 /* ColorigTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -230,26 +218,26 @@
 /* Begin PBXTargetDependency section */
 		EC1AEC7A1A1C6B4A00D1FA48 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = EC1AEC621A1C6B4A00D1FA48 /* Colorig */;
+			target = EC1AEC621A1C6B4A00D1FA48 /* himbo */;
 			targetProxy = EC1AEC791A1C6B4A00D1FA48 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		EC1AEC6C1A1C6B4A00D1FA48 /* Main.storyboard */ = {
+		EC6165831A29B76B00658455 /* LaunchScreen.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				EC1AEC6D1A1C6B4A00D1FA48 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		EC1AEC711A1C6B4A00D1FA48 /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				EC1AEC721A1C6B4A00D1FA48 /* Base */,
+				EC6165841A29B76B00658455 /* Base */,
 			);
 			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+		EC6165851A29B76B00658455 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EC6165861A29B76B00658455 /* Base */,
+			);
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -289,7 +277,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -326,7 +314,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -338,9 +326,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = Colorig/Info.plist;
+				INFOPLIST_FILE = himbo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = himbo;
 			};
 			name = Debug;
 		};
@@ -348,16 +336,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = Colorig/Info.plist;
+				INFOPLIST_FILE = himbo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = himbo;
 			};
 			name = Release;
 		};
 		EC1AEC861A1C6B4A00D1FA48 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -366,32 +353,29 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = ColorigTests/Info.plist;
+				INFOPLIST_FILE = himboTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Colorig.app/Colorig";
+				PRODUCT_NAME = himboTests;
 			};
 			name = Debug;
 		};
 		EC1AEC871A1C6B4A00D1FA48 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = ColorigTests/Info.plist;
+				INFOPLIST_FILE = himboTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Colorig.app/Colorig";
+				PRODUCT_NAME = himboTests;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		EC1AEC5E1A1C6B4A00D1FA48 /* Build configuration list for PBXProject "Colorig" */ = {
+		EC1AEC5E1A1C6B4A00D1FA48 /* Build configuration list for PBXProject "himbo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				EC1AEC801A1C6B4A00D1FA48 /* Debug */,
@@ -400,21 +384,23 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		EC1AEC821A1C6B4A00D1FA48 /* Build configuration list for PBXNativeTarget "Colorig" */ = {
+		EC1AEC821A1C6B4A00D1FA48 /* Build configuration list for PBXNativeTarget "himbo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				EC1AEC831A1C6B4A00D1FA48 /* Debug */,
 				EC1AEC841A1C6B4A00D1FA48 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
-		EC1AEC851A1C6B4A00D1FA48 /* Build configuration list for PBXNativeTarget "ColorigTests" */ = {
+		EC1AEC851A1C6B4A00D1FA48 /* Build configuration list for PBXNativeTarget "himboTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				EC1AEC861A1C6B4A00D1FA48 /* Debug */,
 				EC1AEC871A1C6B4A00D1FA48 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
