@@ -1,0 +1,10 @@
+PODS:
+  - PulsingHalo (0.0.1)
+
+DEPENDENCIES:
+  - PulsingHalo
+
+SPEC CHECKSUMS:
+  PulsingHalo: 4f5fbc25f9efb9f949e4ddad05ca885a11667aa0
+
+COCOAPODS: 0.34.4
