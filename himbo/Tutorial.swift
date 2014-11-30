@@ -47,7 +47,7 @@ class Tutorial: NSObject {
         haloView.layer.addSublayer(haloLayer)
 
         haloView.backgroundColor = UIColor.whiteColor()
-        haloView.layer.cornerRadius = 25.0
+        haloView.layer.cornerRadius = CGRectGetHeight(haloView.frame) / 2
         
         parentView.addSubview(haloView)
         

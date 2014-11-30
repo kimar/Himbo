@@ -39,7 +39,7 @@ class InfoView: UIView {
         
         self.infoView = UIView(frame: CGRectMake(kPadding, kPadding, width, width))
         self.infoView.backgroundColor = UIColor.whiteColor()
-        self.infoView.layer.cornerRadius = 135.0
+        self.infoView.layer.cornerRadius = CGRectGetHeight(self.infoView.frame) / 2
         self.infoView.center = center
         
         self.infoLabel = UILabel(frame: CGRectMake(kInfoPadding, kInfoPadding, CGRectGetWidth(self.infoView.frame) - (kInfoPadding * 2), CGRectGetHeight(self.infoView.frame) - (kInfoPadding * 2)))
