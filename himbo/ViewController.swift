@@ -11,17 +11,21 @@ import AssetsLibrary
 
 typealias computedValues = (hue: CGFloat, saturation: CGFloat, brightness: CGFloat)
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, SphereMenuDelegate {
     
     @IBOutlet weak var flashView: UIView!
 
+    let defaults = NSUserDefaults.standardUserDefaults()
+    
     var doubleTap: UITapGestureRecognizer?
     var lastHue: CGFloat = 0.0
     var lastSaturation: CGFloat = 0.0
     var lastBrightness: CGFloat = 1.0
     var lastTouchPoint: CGPoint?
+    var menuOpen: Bool = false
     
     var theTutorial: Tutorial?
+    var sphereMenu: SphereMenu?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,11 +33,21 @@ class ViewController: UIViewController {
         doubleTap = UITapGestureRecognizer(target: self, action: "doubleTap:")
         doubleTap!.numberOfTapsRequired = 2
         self.view.addGestureRecognizer(doubleTap!)
+
+        let images: [UIImage] = [UIImage(named: "icon-close")!, UIImage(named: "icon-facebook")!, UIImage(named: "icon-twitter")!, UIImage(named: "icon-email")!, UIImage(named: "icon-gallery")!]
+        sphereMenu = SphereMenu(startPoint: CGPointMake(CGRectGetWidth(self.view.frame) / 2, CGRectGetHeight(self.view.frame) / 2), submenuImages: images)
+        sphereMenu?.delegate = self
+        self.view.addSubview(sphereMenu!)
+        
+        updateColor((hue: 09, saturation: 1.0, brightness: 1.0))
     }
     
     override func viewDidAppear(animated: Bool) {
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(1.0 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) { () -> Void in
-            self.tutorial()
+//            if self.defaults.boolForKey("tutorial_shown") == false {
+                self.tutorial()
+                self.defaults.setBool(true, forKey: "tutorial_shown")
+//            }
         }
     }
 
@@ -53,8 +67,10 @@ class ViewController: UIViewController {
     }
     
     override func touchesMoved(touches: NSSet, withEvent event: UIEvent) {
-        updateColor(colorComponents(touches))
-        lastTouchPoint = touches.allObjects.first?.locationInView(self.view)
+        if !menuOpen {
+            updateColor(colorComponents(touches))
+            lastTouchPoint = touches.allObjects.first?.locationInView(self.view)
+        }
     }
     
     func updateColor(vals: computedValues) {
@@ -99,12 +115,10 @@ class ViewController: UIViewController {
             return
         }
         
-        flashView.alpha = 1.0
-        UIView.animateWithDuration(0.3, animations: { () -> Void in
-            self.flashView.alpha = 0.0
-            }, completion: { (completed: Bool) -> Void in
-                self.saveToLibrary()
-        })
+        if let menu = self.sphereMenu {
+            menu.toggle()
+        }
+
     }
     
     func checkAssetsAuthorization() -> Bool {
@@ -116,17 +130,32 @@ class ViewController: UIViewController {
         return true
     }
     
+    private func flashView(closure: () -> Void) {
+        self.flashView.alpha = 1.0
+        UIView.animateWithDuration(0.3, animations: { () -> Void in
+            self.flashView.alpha = 0.0
+            }, completion: { (completed: Bool) -> Void in
+                closure()
+        })
+    }
+    
     private func saveToLibrary() {
+        self.flashView { () -> Void in
+            let image = self.renderedImage()
+            ALAssetsLibrary().writeImageToSavedPhotosAlbum(image.CGImage, orientation: ALAssetOrientation.Up) { (path: NSURL!, error: NSError!) -> Void in
+                if error != nil {
+                    UIAlertView(title: "Error", message: "The Photo could not be saved.", delegate: nil, cancelButtonTitle: "OK").show()
+                }
+            }
+        }
+    }
+    
+    private func renderedImage() -> UIImage {
         let bounds = UIScreen.mainScreen().bounds
         let scale = UIScreen.mainScreen().scale
         let size = CGSizeMake(bounds.width * scale, CGRectGetHeight(bounds) * scale)
         let rect = CGRectMake(0, 0, size.width, size.height)
-        let image = imageWithColor(rect, color: self.view.backgroundColor!)
-        ALAssetsLibrary().writeImageToSavedPhotosAlbum(image.CGImage, orientation: ALAssetOrientation.Up) { (path: NSURL!, error: NSError!) -> Void in
-            if error != nil {
-                UIAlertView(title: "Error", message: "The Photo could not be saved.", delegate: nil, cancelButtonTitle: "OK").show()
-            }
-        }
+        return self.imageWithColor(rect, color: self.view.backgroundColor!)
     }
     
     private func imageWithColor(rect: CGRect, color: UIColor) -> UIImage {
@@ -144,6 +173,18 @@ class ViewController: UIViewController {
         theTutorial?.start({ (hue, saturation, brightness) -> Void in
             self.updateColor((hue: hue, saturation: saturation, brightness: brightness))
         })
+    }
+    
+    func sphereDidSelected(index: Int) {
+        println("selected item index: \(index)")
+    }
+    
+    func sphereDidOpen() {
+        menuOpen = true
+    }
+    
+    func sphereDidClose() {
+        menuOpen = false
     }
 }
 
