@@ -11,6 +11,6 @@ import UIKit
 extension UIColor {
     class func himboRed() -> UIColor {
 //        return UIColor(hue: 0.95, saturation: 0.9, brightness: 0.8, alpha: 1.0)
-        return UIColor(red: 167.0/255.0, green: 79.0/255.0, blue: 92.0/255.0, alpha: 1.0)
+        return UIColor(red: 234.0/255.0, green: 84.0/255.0, blue: 122.0/255.0, alpha: 1.0)
     }
 }

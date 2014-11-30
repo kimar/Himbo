@@ -37,7 +37,7 @@ class ViewController: UIViewController, SphereMenuDelegate {
         doubleTap!.numberOfTapsRequired = 2
         self.view.addGestureRecognizer(doubleTap!)
 
-        let images: [UIImage] = [UIImage(named: "icon-close")!, UIImage(named: "icon-facebook")!, UIImage(named: "icon-twitter")!, UIImage(named: "icon-email")!, UIImage(named: "icon-gallery")!]
+        let images: [UIImage] = [UIImage(named: "icon-share")!, UIImage(named: "icon-facebook")!, UIImage(named: "icon-twitter")!, UIImage(named: "icon-email")!, UIImage(named: "icon-gallery")!]
         sphereMenu = SphereMenu(startPoint: CGPointMake(CGRectGetWidth(self.view.frame) / 2, CGRectGetHeight(self.view.frame) / 2), submenuImages: images)
         sphereMenu?.delegate = self
         self.view.addSubview(sphereMenu!)
