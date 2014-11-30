@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8CC07122FF4366C193604EC9 /* libPods-himbo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DF2C223F57198A8D1A0C9A34 /* libPods-himbo.a */; };
 		EC3F24CE1A2AAA9000C58377 /* PulsingLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC3F24CD1A2AAA9000C58377 /* PulsingLayer.swift */; };
 		EC6165521A295B9800658455 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC6165511A295B9800658455 /* AssetsLibrary.framework */; };
 		EC61658A1A29B76B00658455 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6165821A29B76B00658455 /* AppDelegate.swift */; };
@@ -46,7 +45,6 @@
 		EC6165911A29B77000658455 /* ColorigTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorigTests.swift; sourceTree = "<group>"; };
 		EC6165921A29B77000658455 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EC6165951A29BA6400658455 /* ShakeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShakeView.swift; sourceTree = "<group>"; };
-		ECB4C1581A29D2100000A033 /* BridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BridgingHeader.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,7 +53,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				EC6165521A295B9800658455 /* AssetsLibrary.framework in Frameworks */,
-				8CC07122FF4366C193604EC9 /* libPods-himbo.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -117,7 +114,6 @@
 				EC6165881A29B76B00658455 /* Info.plist */,
 				EC6165891A29B76B00658455 /* ViewController.swift */,
 				EC6165951A29BA6400658455 /* ShakeView.swift */,
-				ECB4C1581A29D2100000A033 /* BridgingHeader.h */,
 				EC3F24CD1A2AAA9000C58377 /* PulsingLayer.swift */,
 			);
 			path = himbo;
@@ -139,11 +135,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = EC1AEC821A1C6B4A00D1FA48 /* Build configuration list for PBXNativeTarget "himbo" */;
 			buildPhases = (
-				8C95A26CB17392B7D928E371 /* Check Pods Manifest.lock */,
 				EC1AEC5F1A1C6B4A00D1FA48 /* Sources */,
 				EC1AEC601A1C6B4A00D1FA48 /* Frameworks */,
 				EC1AEC611A1C6B4A00D1FA48 /* Resources */,
-				9928BC839CB08FA9EE3F7999 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -228,39 +222,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		8C95A26CB17392B7D928E371 /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		9928BC839CB08FA9EE3F7999 /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-himbo/Pods-himbo-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		EC1AEC5F1A1C6B4A00D1FA48 /* Sources */ = {
@@ -393,25 +354,21 @@
 		};
 		EC1AEC831A1C6B4A00D1FA48 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0E981CFA1105CA64BCEAE9CD /* Pods-himbo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = himbo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = himbo;
-				SWIFT_OBJC_BRIDGING_HEADER = himbo/BridgingHeader.h;
 			};
 			name = Debug;
 		};
 		EC1AEC841A1C6B4A00D1FA48 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 49FD340327310FF0989AD5A9 /* Pods-himbo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = himbo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = himbo;
-				SWIFT_OBJC_BRIDGING_HEADER = himbo/BridgingHeader.h;
 			};
 			name = Release;
 		};
