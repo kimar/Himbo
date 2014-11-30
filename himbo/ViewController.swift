@@ -15,7 +15,7 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var flashView: UIView!
     var haloView: UIView!
-    var haloLayer: PulsingHaloLayer!
+    var haloLayer: PulsingLayer!
 
     var doubleTap: UITapGestureRecognizer?
     var lastHue: CGFloat = 0.0
@@ -140,7 +140,8 @@ class ViewController: UIViewController {
     }
     
     private func tutorial() {
-        haloLayer = PulsingHaloLayer.init()
+        haloLayer = PulsingLayer(pulseColor: UIColor(white: 1.0, alpha: 1.0))
+        haloLayer.radius = 60.0
         haloLayer.animationDuration = 1
         haloLayer.pulseInterval = 0
         
