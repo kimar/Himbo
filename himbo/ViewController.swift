@@ -14,14 +14,14 @@ typealias computedValues = (hue: CGFloat, saturation: CGFloat, brightness: CGFlo
 class ViewController: UIViewController {
     
     @IBOutlet weak var flashView: UIView!
-    var haloView: UIView!
-    var haloLayer: PulsingLayer!
 
     var doubleTap: UITapGestureRecognizer?
     var lastHue: CGFloat = 0.0
     var lastSaturation: CGFloat = 0.0
     var lastBrightness: CGFloat = 1.0
     var lastTouchPoint: CGPoint?
+    
+    var theTutorial: Tutorial?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -140,42 +140,10 @@ class ViewController: UIViewController {
     }
     
     private func tutorial() {
-        haloLayer = PulsingLayer(pulseColor: UIColor(white: 1.0, alpha: 1.0))
-        haloLayer.radius = 60.0
-        haloLayer.animationDuration = 1
-        haloLayer.pulseInterval = 0
-        
-        haloView = UIView(frame: CGRectMake(50, 50, 25, 25));
-        haloView.layer.addSublayer(haloLayer)
-        self.view.addSubview(haloView)
-        
-        UIView.animateWithDuration(5.0, animations: { () -> Void in
-            self.haloView.transform = CGAffineTransformMakeTranslation(0, self.view.frame.size.height - 100)
-            self.updateColor((hue: 0.9, saturation: 1.0, brightness: 1.0))
-            }) { (finished: Bool) -> Void in
-            UIView.animateWithDuration(5.0, animations: { () -> Void in
-                self.haloView.transform = CGAffineTransformMakeTranslation(self.view.frame.size.width - 100, self.view.frame.size.height - 100)
-                self.updateColor((hue: 0.9, saturation: 1.0, brightness: 0.1))
-                }, completion: { (finished: Bool) -> Void in
-                UIView.animateWithDuration(5.0, animations: { () -> Void in
-                    self.haloView.transform = CGAffineTransformMakeTranslation(0, self.view.frame.size.height - 100)
-                    self.updateColor((hue: 0.9, saturation: 1.0, brightness: 1.0))
-                    }, completion: { (finished: Bool) -> Void in
-                        self.haloView.transform = CGAffineTransformIdentity
-                        UIView.animateWithDuration(5.0, animations: { () -> Void in
-                            self.haloView.transform = CGAffineTransformMakeTranslation(self.view.frame.size.width - 100, 0)
-                            self.updateColor((hue: 0.9, saturation: 0.1, brightness: 1.0))
-                            }, completion: { (finished: Bool) -> Void in
-                                UIView.animateWithDuration(5.0, animations: { () -> Void in
-                                    self.haloView.transform = CGAffineTransformIdentity
-                                    self.updateColor((hue: 0.9, saturation: 1.0, brightness: 1.0))
-                                    }, completion: { (finished: Bool) -> Void in
-                                        self.haloView.removeFromSuperview()
-                                })
-                        })
-                })
-            })
-        }
+        theTutorial = Tutorial(view: self.view)
+        theTutorial?.start({ (hue, saturation, brightness) -> Void in
+            self.updateColor((hue: hue, saturation: saturation, brightness: brightness))
+        })
     }
 }
 

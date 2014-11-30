@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		EC3F24CE1A2AAA9000C58377 /* PulsingLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC3F24CD1A2AAA9000C58377 /* PulsingLayer.swift */; };
+		EC3F24D01A2AB78E00C58377 /* Tutorial.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC3F24CF1A2AB78E00C58377 /* Tutorial.swift */; };
 		EC6165521A295B9800658455 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC6165511A295B9800658455 /* AssetsLibrary.framework */; };
 		EC61658A1A29B76B00658455 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6165821A29B76B00658455 /* AppDelegate.swift */; };
 		EC61658B1A29B76B00658455 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = EC6165831A29B76B00658455 /* LaunchScreen.xib */; };
@@ -35,6 +36,7 @@
 		EC1AEC631A1C6B4A00D1FA48 /* himbo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = himbo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC1AEC781A1C6B4A00D1FA48 /* himboTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = himboTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC3F24CD1A2AAA9000C58377 /* PulsingLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PulsingLayer.swift; sourceTree = "<group>"; };
+		EC3F24CF1A2AB78E00C58377 /* Tutorial.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tutorial.swift; sourceTree = "<group>"; };
 		EC6165511A295B9800658455 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		EC6165821A29B76B00658455 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EC6165841A29B76B00658455 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -115,6 +117,7 @@
 				EC6165891A29B76B00658455 /* ViewController.swift */,
 				EC6165951A29BA6400658455 /* ShakeView.swift */,
 				EC3F24CD1A2AAA9000C58377 /* PulsingLayer.swift */,
+				EC3F24CF1A2AB78E00C58377 /* Tutorial.swift */,
 			);
 			path = himbo;
 			sourceTree = "<group>";
@@ -232,6 +235,7 @@
 				EC61658F1A29B76B00658455 /* ViewController.swift in Sources */,
 				EC61658A1A29B76B00658455 /* AppDelegate.swift in Sources */,
 				EC6165961A29BA6400658455 /* ShakeView.swift in Sources */,
+				EC3F24D01A2AB78E00C58377 /* Tutorial.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
