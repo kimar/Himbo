@@ -114,11 +114,13 @@ class ViewController: UIViewController, SphereMenuDelegate {
             UIAlertView(title: "Error", message: "Please go into your Device's Settings and allow Album Access for himbo. This App will only save the current Wallpaper to your Albums. No Access to this or other Photos is gained.", delegate: nil, cancelButtonTitle: "OK").show()
             return
         }
-        
+        toggleMenu()
+    }
+    
+    private func toggleMenu() {
         if let menu = self.sphereMenu {
             menu.toggle()
         }
-
     }
     
     func checkAssetsAuthorization() -> Bool {
@@ -172,6 +174,8 @@ class ViewController: UIViewController, SphereMenuDelegate {
         theTutorial = Tutorial(view: self.view)
         theTutorial?.start({ (hue, saturation, brightness) -> Void in
             self.updateColor((hue: hue, saturation: saturation, brightness: brightness))
+            }, { () -> Void in
+                self.toggleMenu()
         })
     }
     
