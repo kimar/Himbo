@@ -22,10 +22,13 @@ class ViewController: UIViewController, SphereMenuDelegate {
     var lastSaturation: CGFloat = 0.0
     var lastBrightness: CGFloat = 1.0
     var lastTouchPoint: CGPoint?
-    var menuOpen: Bool = false
+    
+    var infoVisible: Bool = false
+    var menuVisible: Bool = false
     
     var theTutorial: Tutorial?
     var sphereMenu: SphereMenu?
+    var infoView: InfoView?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,16 +42,24 @@ class ViewController: UIViewController, SphereMenuDelegate {
         sphereMenu?.delegate = self
         self.view.addSubview(sphereMenu!)
         
-        updateColor((hue: 09, saturation: 1.0, brightness: 1.0))
+        infoView = InfoView(text: "Start\nTutorial", parentView: self.view)
+    
     }
     
     override func viewDidAppear(animated: Bool) {
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(1.0 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) { () -> Void in
-//            if self.defaults.boolForKey("tutorial_shown") == false {
-                self.tutorial()
-                self.defaults.setBool(true, forKey: "tutorial_shown")
-//            }
-        }
+        super.viewDidAppear(animated)
+        
+//        if self.defaults.boolForKey("tutorial_shown") {
+//            self.updateColor((hue: 0.95, saturation: 0.8, brightness: 0.9))
+//            return;
+//        }
+        
+        self.infoVisible = true
+        self.infoView?.show({ () -> Void in
+            self.defaults.setBool(true, forKey: "tutorial_shown")
+            self.infoVisible = false
+            self.tutorial()
+        })
     }
 
     override func didReceiveMemoryWarning() {
@@ -64,10 +75,13 @@ class ViewController: UIViewController, SphereMenuDelegate {
         if lastTouchPoint == nil {
             lastTouchPoint = touches.allObjects.first?.locationInView(self.view)
         }
+        if !infoVisible && menuVisible {
+            toggleMenu()
+        }
     }
     
     override func touchesMoved(touches: NSSet, withEvent event: UIEvent) {
-        if !menuOpen {
+        if !infoVisible {
             updateColor(colorComponents(touches))
             lastTouchPoint = touches.allObjects.first?.locationInView(self.view)
         }
@@ -109,11 +123,6 @@ class ViewController: UIViewController, SphereMenuDelegate {
     }
     
     func doubleTap(gestureRecognizer: UITapGestureRecognizer) {
-        
-        if !checkAssetsAuthorization() {
-            UIAlertView(title: "Error", message: "Please go into your Device's Settings and allow Album Access for himbo. This App will only save the current Wallpaper to your Albums. No Access to this or other Photos is gained.", delegate: nil, cancelButtonTitle: "OK").show()
-            return
-        }
         toggleMenu()
     }
     
@@ -125,7 +134,7 @@ class ViewController: UIViewController, SphereMenuDelegate {
     
     func checkAssetsAuthorization() -> Bool {
         let status = ALAssetsLibrary.authorizationStatus()
-        if status != ALAuthorizationStatus.Authorized {
+        if status == ALAuthorizationStatus.Denied {
             self.view.shake(10, direction: ShakeDirection.Horizontal)
             return false
         }
@@ -180,15 +189,21 @@ class ViewController: UIViewController, SphereMenuDelegate {
     }
     
     func sphereDidSelected(index: Int) {
-        println("selected item index: \(index)")
+        if index == 4 {
+            if !checkAssetsAuthorization() {
+                UIAlertView(title: "Error", message: "Please go into your Device's Settings and allow Album Access for himbo. This App will only save the current Wallpaper to your Albums. No Access to this or other Photos is gained.", delegate: nil, cancelButtonTitle: "OK").show()
+                return
+            }
+            self.saveToLibrary();
+        }
     }
     
     func sphereDidOpen() {
-        menuOpen = true
+        menuVisible = true
     }
     
     func sphereDidClose() {
-        menuOpen = false
+        menuVisible = false
     }
 }
 

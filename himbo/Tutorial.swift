@@ -21,9 +21,14 @@ class Tutorial: NSObject {
     
     private var menuToggle: (() -> Void)?
     
+    private var kHue: CGFloat = 0.0
+    private var kSat: CGFloat = 0.0
+    private var kBri: CGFloat = 0.0
+    
     init(view: UIView) {
         super.init()
         self.parentView = view
+        UIColor.himboRed().getHue(&kHue, saturation: &kSat, brightness: &kBri, alpha: nil)
     }
     
     func start(closure: (hue: CGFloat, saturation: CGFloat, brightness: CGFloat) -> Void, menuToggle: () -> Void) {
@@ -46,7 +51,7 @@ class Tutorial: NSObject {
         
         UIView.animateWithDuration(kMovementDuration, animations: { () -> Void in
             self.haloView.transform = CGAffineTransformMakeTranslation(0, self.parentView.frame.size.height - 130)
-            closure(hue: 0.9, saturation: 1.0, brightness: 1.0)
+            closure(hue: self.kHue, saturation: self.kSat, brightness: self.kBri)
             }) { (finished: Bool) -> Void in
                 self.step1(closure)
         }
@@ -55,7 +60,7 @@ class Tutorial: NSObject {
     func step1(closure: aClosure) {
         UIView.animateWithDuration(kMovementDuration, animations: { () -> Void in
             self.haloView.transform = CGAffineTransformMakeTranslation(self.parentView.frame.size.width - 130, self.parentView.frame.size.height - 130)
-            closure(hue: 0.9, saturation: 1.0, brightness: 0.1)
+            closure(hue: self.kHue, saturation: self.kSat, brightness: 0.1)
             }, completion: { (finished: Bool) -> Void in
                 self.step2(closure)
         })
@@ -64,7 +69,7 @@ class Tutorial: NSObject {
     func step2(closure: aClosure) {
         UIView.animateWithDuration(kMovementDuration, animations: { () -> Void in
             self.haloView.transform = CGAffineTransformMakeTranslation(0, self.parentView.frame.size.height - 130)
-            closure(hue: 0.9, saturation: 1.0, brightness: 1.0)
+            closure(hue: self.kHue, saturation: self.kSat, brightness: self.kBri)
             }, completion: { (finished: Bool) -> Void in
                 self.step3(closure)
         })
@@ -74,7 +79,7 @@ class Tutorial: NSObject {
         self.haloView.transform = CGAffineTransformIdentity
         UIView.animateWithDuration(kMovementDuration, animations: { () -> Void in
             self.haloView.transform = CGAffineTransformMakeTranslation(self.parentView.frame.size.width - 130, 0)
-            closure(hue: 0.9, saturation: 0.1, brightness: 1.0)
+            closure(hue: self.kHue, saturation: 0.1, brightness: self.kBri)
             }, completion: { (finished: Bool) -> Void in
                 self.step4(closure)
         })
@@ -83,7 +88,7 @@ class Tutorial: NSObject {
     func step4(closure: aClosure) {
         UIView.animateWithDuration(kMovementDuration, animations: { () -> Void in
             self.haloView.transform = CGAffineTransformIdentity
-            closure(hue: 0.9, saturation: 1.0, brightness: 1.0)
+            closure(hue: self.kHue, saturation: self.kSat, brightness: self.kBri)
             }, completion: { (finished: Bool) -> Void in
                 self.step5(closure)
         })
