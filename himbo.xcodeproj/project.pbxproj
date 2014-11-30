@@ -122,11 +122,11 @@
 				EC3F24D11A2ABF6600C58377 /* SphereMenu.swift */,
 				EC3F24CD1A2AAA9000C58377 /* PulsingLayer.swift */,
 				EC3F24D31A2AEC1900C58377 /* InfoView.swift */,
+				EC3F24D51A2B125700C58377 /* Colors.swift */,
 				EC6165831A29B76B00658455 /* LaunchScreen.xib */,
 				EC6165851A29B76B00658455 /* Main.storyboard */,
 				EC6165871A29B76B00658455 /* Images.xcassets */,
 				EC6165881A29B76B00658455 /* Info.plist */,
-				EC3F24D51A2B125700C58377 /* Colors.swift */,
 			);
 			path = himbo;
 			sourceTree = "<group>";

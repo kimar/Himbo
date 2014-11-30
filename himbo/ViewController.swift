@@ -49,10 +49,10 @@ class ViewController: UIViewController, SphereMenuDelegate {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-//        if self.defaults.boolForKey("tutorial_shown") {
-//            self.updateColor((hue: 0.95, saturation: 0.8, brightness: 0.9))
-//            return;
-//        }
+        if self.defaults.boolForKey("tutorial_shown") {
+            self.updateColor((hue: 0.95, saturation: 0.8, brightness: 0.9))
+            return;
+        }
         
         self.infoVisible = true
         self.infoView?.show({ () -> Void in
@@ -123,13 +123,26 @@ class ViewController: UIViewController, SphereMenuDelegate {
     }
     
     func doubleTap(gestureRecognizer: UITapGestureRecognizer) {
-        toggleMenu()
+//        toggleMenu()
+        self.flashView { () -> Void in
+            if let url = self.temporaryBackground() {
+                let activity = UIActivityViewController(activityItems: [url], applicationActivities: nil)
+                self.presentViewController(activity, animated: true, completion: nil)
+            }
+        }
     }
     
     private func toggleMenu() {
         if let menu = self.sphereMenu {
             menu.toggle()
         }
+    }
+    
+    private func temporaryBackground() -> NSURL? {
+        let image = self.renderedImage()
+        let path = NSTemporaryDirectory().stringByAppendingPathComponent("himbo.png")
+        UIImagePNGRepresentation(image).writeToFile(path, atomically: true)
+        return NSURL.fileURLWithPath(path)?
     }
     
     func checkAssetsAuthorization() -> Bool {
