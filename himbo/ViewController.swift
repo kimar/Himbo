@@ -24,7 +24,7 @@ class ViewController: UIViewController, SphereMenuDelegate {
     var lastTouchPoint: CGPoint?
     
     var infoVisible: Bool = false
-    var menuVisible: Bool = false
+//    var menuVisible: Bool = false
     
     var theTutorial: Tutorial?
     var sphereMenu: SphereMenu?
@@ -49,10 +49,10 @@ class ViewController: UIViewController, SphereMenuDelegate {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        if self.defaults.boolForKey("tutorial_shown") {
-            self.updateColor((hue: 0.95, saturation: 0.8, brightness: 0.9))
-            return;
-        }
+//        if self.defaults.boolForKey("tutorial_shown") {
+//            self.updateColor((hue: 0.95, saturation: 0.8, brightness: 0.9))
+//            return;
+//        }
         
         self.infoVisible = true
         self.infoView?.show({ () -> Void in
@@ -75,9 +75,9 @@ class ViewController: UIViewController, SphereMenuDelegate {
         if lastTouchPoint == nil {
             lastTouchPoint = touches.allObjects.first?.locationInView(self.view)
         }
-        if !infoVisible && menuVisible {
-            toggleMenu()
-        }
+//        if !infoVisible && menuVisible {
+//            toggleMenu()
+//        }
     }
     
     override func touchesMoved(touches: NSSet, withEvent event: UIEvent) {
@@ -211,12 +211,12 @@ class ViewController: UIViewController, SphereMenuDelegate {
         }
     }
     
-    func sphereDidOpen() {
-        menuVisible = true
-    }
-    
-    func sphereDidClose() {
-        menuVisible = false
-    }
+//    func sphereDidOpen() {
+//        menuVisible = true
+//    }
+//    
+//    func sphereDidClose() {
+//        menuVisible = false
+//    }
 }
 
