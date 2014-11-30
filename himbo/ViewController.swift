@@ -24,7 +24,7 @@ class ViewController: UIViewController, SphereMenuDelegate {
     var lastTouchPoint: CGPoint?
     
     var infoVisible: Bool = false
-//    var menuVisible: Bool = false
+    var tutorialRunning: Bool = false
     
     var theTutorial: Tutorial?
     var sphereMenu: SphereMenu?
@@ -41,23 +41,25 @@ class ViewController: UIViewController, SphereMenuDelegate {
         sphereMenu = SphereMenu(startPoint: CGPointMake(CGRectGetWidth(self.view.frame) / 2, CGRectGetHeight(self.view.frame) / 2), submenuImages: images)
         sphereMenu?.delegate = self
         self.view.addSubview(sphereMenu!)
-        
-        infoView = InfoView(text: "Start\nTutorial", parentView: self.view)
-    
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        
-//        if self.defaults.boolForKey("tutorial_shown") {
-//            self.updateColor((hue: 0.95, saturation: 0.8, brightness: 0.9))
-//            return;
-//        }
-        
+        if self.defaults.boolForKey("tutorial_shown") {
+            self.updateColor((hue: 0.95, saturation: 0.8, brightness: 0.9))
+            return;
+        }
+        self.showInfo();
+    }
+    
+    private func showInfo() {
         self.infoVisible = true
+        self.infoView = nil;
+        self.infoView = InfoView(text: "Start\nTutorial", parentView: self.view)
         self.infoView?.show({ () -> Void in
             self.defaults.setBool(true, forKey: "tutorial_shown")
             self.infoVisible = false
+            self.tutorialRunning = true
             self.tutorial()
         })
     }
@@ -75,9 +77,6 @@ class ViewController: UIViewController, SphereMenuDelegate {
         if lastTouchPoint == nil {
             lastTouchPoint = touches.allObjects.first?.locationInView(self.view)
         }
-//        if !infoVisible && menuVisible {
-//            toggleMenu()
-//        }
     }
     
     override func touchesMoved(touches: NSSet, withEvent event: UIEvent) {
@@ -123,7 +122,6 @@ class ViewController: UIViewController, SphereMenuDelegate {
     }
     
     func doubleTap(gestureRecognizer: UITapGestureRecognizer) {
-//        toggleMenu()
         self.flashView { () -> Void in
             if let url = self.temporaryBackground() {
                 let activity = UIActivityViewController(activityItems: [url], applicationActivities: nil)
@@ -198,6 +196,8 @@ class ViewController: UIViewController, SphereMenuDelegate {
             self.updateColor((hue: hue, saturation: saturation, brightness: brightness))
             }, { () -> Void in
                 self.toggleMenu()
+            }, { () -> Void in
+                self.tutorialRunning = false
         })
     }
     
@@ -211,12 +211,16 @@ class ViewController: UIViewController, SphereMenuDelegate {
         }
     }
     
-//    func sphereDidOpen() {
-//        menuVisible = true
-//    }
-//    
-//    func sphereDidClose() {
-//        menuVisible = false
-//    }
+    override func canBecomeFirstResponder() -> Bool {
+        return true
+    }
+    
+    override func motionEnded(motion: UIEventSubtype, withEvent event: UIEvent) {
+        if event.subtype == UIEventSubtype.MotionShake {
+            if !infoVisible && !tutorialRunning {
+                self.showInfo()
+            }
+        }
+    }
 }
 

@@ -20,6 +20,7 @@ class Tutorial: NSObject {
     private let kTapDuration = 0.3
     
     private var menuToggle: (() -> Void)?
+    private var finished: (() -> Void)?
     
     private var kHue: CGFloat = 0.0
     private var kSat: CGFloat = 0.0
@@ -31,9 +32,10 @@ class Tutorial: NSObject {
         UIColor.himboRed().getHue(&kHue, saturation: &kSat, brightness: &kBri, alpha: nil)
     }
     
-    func start(closure: (hue: CGFloat, saturation: CGFloat, brightness: CGFloat) -> Void, menuToggle: () -> Void) {
+    func start(closure: (hue: CGFloat, saturation: CGFloat, brightness: CGFloat) -> Void, menuToggle: () -> Void, finished: () -> Void) {
         
         self.menuToggle = menuToggle
+        self.finished = finished
         
         haloLayer = PulsingLayer(pulseColor: UIColor(white: 1.0, alpha: 1.0))
         haloLayer.radius = 90.0
@@ -139,5 +141,6 @@ class Tutorial: NSObject {
     // Remove haloView, end Tutorial
     func step9(closure: aClosure) {
         self.haloView.removeFromSuperview()
+        self.finished?()
     }
 }
