@@ -79,7 +79,7 @@ class InfoView: UIView {
         self.onHide = onHide;
         self.parentView.addSubview(self)
         UIView.animateWithDuration(0.3, animations: { () -> Void in
-            self.alpha = 0.8
+            self.alpha = 1.0
         })
     }
     
