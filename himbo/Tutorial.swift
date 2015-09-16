@@ -117,7 +117,7 @@ class Tutorial: NSObject {
                 UIView.animateWithDuration(self.kTapDuration, animations: { () -> Void in
                     self.haloView.transform = CGAffineTransformMakeScale(1.0, 1.0)
                     }, completion: { (finished: Bool) -> Void in
-                    done(closure)
+                    done(doneClosure: closure)
                 })
         })
     }

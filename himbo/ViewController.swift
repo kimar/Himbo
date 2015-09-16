@@ -73,16 +73,16 @@ class ViewController: UIViewController, SphereMenuDelegate {
         return true
     }
     
-    override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         if lastTouchPoint == nil {
-            lastTouchPoint = touches.allObjects.first?.locationInView(self.view)
+            lastTouchPoint = touches.first?.locationInView(self.view)
         }
     }
     
-    override func touchesMoved(touches: NSSet, withEvent event: UIEvent) {
+    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
         if !infoVisible {
             updateColor(colorComponents(touches))
-            lastTouchPoint = touches.allObjects.first?.locationInView(self.view)
+            lastTouchPoint = touches.first?.locationInView(self.view)
         }
     }
     
@@ -94,7 +94,7 @@ class ViewController: UIViewController, SphereMenuDelegate {
         let viewHeight = CGRectGetHeight(self.view.frame)
         let viewWidth = CGRectGetWidth(self.view.frame)
         
-        let touch = touches.allObjects.first as UITouch
+        let touch = touches.allObjects.first as! UITouch
         let location = touch.locationInView(self.view)
 
         // Detect significant change in up/down movement (and set hue accordingly)
@@ -138,9 +138,12 @@ class ViewController: UIViewController, SphereMenuDelegate {
     
     private func temporaryBackground() -> NSURL? {
         let image = self.renderedImage()
-        let path = NSTemporaryDirectory().stringByAppendingPathComponent("himbo.png")
-        UIImagePNGRepresentation(image).writeToFile(path, atomically: true)
-        return NSURL.fileURLWithPath(path)?
+        let path = NSTemporaryDirectory().stringByAppendingString("/himbo.png")
+        guard let imageData = UIImagePNGRepresentation(image) else {
+            return nil
+        }
+        imageData.writeToFile(path, atomically: true)
+        return NSURL.fileURLWithPath(path)
     }
     
     func checkAssetsAuthorization() -> Bool {
@@ -194,9 +197,9 @@ class ViewController: UIViewController, SphereMenuDelegate {
         theTutorial = Tutorial(view: self.view)
         theTutorial?.start({ (hue, saturation, brightness) -> Void in
             self.updateColor((hue: hue, saturation: saturation, brightness: brightness))
-            }, { () -> Void in
+            }, menuToggle: { () -> Void in
                 self.toggleMenu()
-            }, { () -> Void in
+            }, finished: { () -> Void in
                 self.tutorialRunning = false
         })
     }
@@ -215,8 +218,8 @@ class ViewController: UIViewController, SphereMenuDelegate {
         return true
     }
     
-    override func motionEnded(motion: UIEventSubtype, withEvent event: UIEvent) {
-        if event.subtype == UIEventSubtype.MotionShake {
+    override func motionEnded(motion: UIEventSubtype, withEvent event: UIEvent?) {
+        if let event = event where event.subtype == UIEventSubtype.MotionShake {
             if !infoVisible && !tutorialRunning {
                 self.showInfo()
             }

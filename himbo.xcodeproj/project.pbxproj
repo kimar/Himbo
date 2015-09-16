@@ -86,6 +86,7 @@
 		16326F37C70C58EECAE3587F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				EC6165511A295B9800658455 /* AssetsLibrary.framework */,
 				DF2C223F57198A8D1A0C9A34 /* libPods-himbo.a */,
 			);
 			name = Frameworks;
@@ -94,7 +95,6 @@
 		EC1AEC5A1A1C6B4A00D1FA48 = {
 			isa = PBXGroup;
 			children = (
-				EC6165511A295B9800658455 /* AssetsLibrary.framework */,
 				EC6165811A29B76B00658455 /* himbo */,
 				EC6165901A29B77000658455 /* himboTests */,
 				EC1AEC641A1C6B4A00D1FA48 /* Products */,
@@ -184,6 +184,8 @@
 		EC1AEC5B1A1C6B4A00D1FA48 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftMigration = 0700;
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = "Marcus Kida";
 				TargetAttributes = {
