@@ -104,11 +104,18 @@ class ViewController: UIViewController, SphereMenuDelegate {
             }
         }
         
-        if location.y <= viewHeight / 2 {
+        if #available(iOS 9.0, *) {
             lastSaturation = ultimateFormula(viewWidth, y: location.x)
+            lastBrightness = ultimateFormula(viewWidth, y: (touches.allObjects.first?.force)!*100)
         } else {
-            lastBrightness = ultimateFormula(viewWidth, y: location.x)
+            if location.y <= viewHeight / 2 {
+                lastSaturation = ultimateFormula(viewWidth, y: location.x)
+            } else {
+                lastBrightness = ultimateFormula(viewWidth, y: location.x)
+            }
         }
+        
+
         
         return (lastHue, lastSaturation, lastBrightness)
     }
