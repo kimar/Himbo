@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import AssetsLibrary
 
 typealias computedValues = (hue: CGFloat, saturation: CGFloat, brightness: CGFloat)
 
@@ -29,9 +28,11 @@ class ViewController: UIViewController, SphereMenuDelegate {
     var theTutorial: Tutorial?
     var sphereMenu: SphereMenu?
     var infoView: InfoView?
-
+    var exporter: Exporter?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        exporter = Exporter(view: self.view, flashView: self.flashView)
         
         doubleTap = UITapGestureRecognizer(target: self, action: "doubleTap:")
         doubleTap!.numberOfTapsRequired = 2
@@ -142,8 +143,12 @@ class ViewController: UIViewController, SphereMenuDelegate {
     }
     
     func doubleTap(gestureRecognizer: UITapGestureRecognizer) {
-        self.flashView { () -> Void in
-            if let url = self.temporaryBackground() {
+        guard let exporter = exporter else {
+            //fixme: handle non existing exporter
+            return
+        }
+        exporter.flashView { () -> Void in
+            if let url = exporter.temporaryBackground() {
                 let activity = UIActivityViewController(activityItems: [url], applicationActivities: nil)
                 self.presentViewController(activity, animated: true, completion: nil)
             }
@@ -155,64 +160,7 @@ class ViewController: UIViewController, SphereMenuDelegate {
             menu.toggle()
         }
     }
-    
-    private func temporaryBackground() -> NSURL? {
-        let image = self.renderedImage()
-        let path = NSTemporaryDirectory().stringByAppendingString("/himbo.png")
-        guard let imageData = UIImagePNGRepresentation(image) else {
-            return nil
-        }
-        imageData.writeToFile(path, atomically: true)
-        return NSURL.fileURLWithPath(path)
-    }
-    
-    func checkAssetsAuthorization() -> Bool {
-        let status = ALAssetsLibrary.authorizationStatus()
-        if status == ALAuthorizationStatus.Denied {
-            self.view.shake(10, direction: ShakeDirection.Horizontal)
-            return false
-        }
-        return true
-    }
-    
-    private func flashView(closure: () -> Void) {
-        self.flashView.alpha = 1.0
-        UIView.animateWithDuration(0.3, animations: { () -> Void in
-            self.flashView.alpha = 0.0
-            }, completion: { (completed: Bool) -> Void in
-                closure()
-        })
-    }
-    
-    private func saveToLibrary() {
-        self.flashView { () -> Void in
-            let image = self.renderedImage()
-            ALAssetsLibrary().writeImageToSavedPhotosAlbum(image.CGImage, orientation: ALAssetOrientation.Up) { (path: NSURL!, error: NSError!) -> Void in
-                if error != nil {
-                    UIAlertView(title: "Error", message: "The Photo could not be saved.", delegate: nil, cancelButtonTitle: "OK").show()
-                }
-            }
-        }
-    }
-    
-    private func renderedImage() -> UIImage {
-        let bounds = UIScreen.mainScreen().bounds
-        let scale = UIScreen.mainScreen().scale
-        let size = CGSizeMake(bounds.width * scale, CGRectGetHeight(bounds) * scale)
-        let rect = CGRectMake(0, 0, size.width, size.height)
-        return self.imageWithColor(rect, color: self.view.backgroundColor!)
-    }
-    
-    private func imageWithColor(rect: CGRect, color: UIColor) -> UIImage {
-        UIGraphicsBeginImageContext(rect.size)
-        let ctx = UIGraphicsGetCurrentContext()
-        CGContextSetFillColorWithColor(ctx, color.CGColor)
-        CGContextFillRect(ctx, rect)
-        let image = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return image
-    }
-    
+        
     private func tutorial() {
         theTutorial = Tutorial(view: self.view)
         theTutorial?.start({ (hue, saturation, brightness) -> Void in
@@ -226,11 +174,15 @@ class ViewController: UIViewController, SphereMenuDelegate {
     
     func sphereDidSelected(index: Int) {
         if index == 4 {
-            if !checkAssetsAuthorization() {
+            guard let exporter = exporter else {
+                // fixme: handle non existing exporter
+                return
+            }
+            if !exporter.checkAssetsAuthorization() {
                 UIAlertView(title: "Error", message: "Please go into your Device's Settings and allow Album Access for himbo. This App will only save the current Wallpaper to your Albums. No Access to this or other Photos is gained.", delegate: nil, cancelButtonTitle: "OK").show()
                 return
             }
-            self.saveToLibrary();
+            exporter.saveToLibrary();
         }
     }
     

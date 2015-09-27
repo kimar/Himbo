@@ -15,6 +15,7 @@ import UIKit
     optional func sphereDidClose()
 }
 
+// fixme: make this a struct
 class SphereMenu:UIView, UICollisionBehaviorDelegate{
     
 

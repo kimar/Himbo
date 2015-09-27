@@ -9,7 +9,7 @@
 import UIKit
 import QuartzCore
 
-
+// fixme: make this a struct
 class PulsingLayer: CALayer {
     
     var radius: CGFloat {

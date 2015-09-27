@@ -10,6 +10,7 @@ import UIKit
 
 typealias aClosure = (hue: CGFloat, saturation: CGFloat, brightness: CGFloat) -> Void
 
+// fixme: make this a struct
 class Tutorial: NSObject {
     
     private var parentView: UIView!
