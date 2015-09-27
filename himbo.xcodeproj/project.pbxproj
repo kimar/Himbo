@@ -393,7 +393,6 @@
 				INFOPLIST_FILE = himbo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = himbo;
-				PROVISIONING_PROFILE = "08a3927f-66d2-4b77-bb9c-948df30253a2";
 			};
 			name = Release;
 		};
