@@ -91,11 +91,16 @@ class ViewController: UIViewController, SphereMenuDelegate {
     }
     
     private func colorComponents (touches: NSSet) -> computedValues {
+        
         let viewHeight = CGRectGetHeight(self.view.frame)
         let viewWidth = CGRectGetWidth(self.view.frame)
         
         let touch = touches.allObjects.first as! UITouch
         let location = touch.locationInView(self.view)
+        
+        func computeAttribute () -> CGFloat {
+            return ultimateFormula(viewWidth, y: location.x)
+        }
 
         // Detect significant change in up/down movement (and set hue accordingly)
         if let last = lastTouchPoint {
@@ -104,18 +109,26 @@ class ViewController: UIViewController, SphereMenuDelegate {
             }
         }
         
+        // calculate S/B
+        var classic = true
+        var force: CGFloat = 0.0
         if #available(iOS 9.0, *) {
-            lastSaturation = ultimateFormula(viewWidth, y: location.x)
-            lastBrightness = ultimateFormula(viewWidth, y: (touches.allObjects.first?.force)!*100)
-        } else {
-            if location.y <= viewHeight / 2 {
-                lastSaturation = ultimateFormula(viewWidth, y: location.x)
-            } else {
-                lastBrightness = ultimateFormula(viewWidth, y: location.x)
+            if traitCollection.forceTouchCapability == .Available {
+                classic = false
+                force = (touches.allObjects.first?.force)!
             }
         }
         
-
+        if classic {
+            if location.y <= viewHeight / 2 {
+                lastSaturation = computeAttribute()
+            } else {
+                lastBrightness = computeAttribute()
+            }
+        } else {
+            lastSaturation = computeAttribute()
+            lastBrightness = ultimateFormula(viewWidth, y: force * 100)
+        }
         
         return (lastHue, lastSaturation, lastBrightness)
     }
