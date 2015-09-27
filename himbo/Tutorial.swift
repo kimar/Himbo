@@ -32,7 +32,23 @@ class Tutorial: NSObject {
         UIColor.himboRed().getHue(&kHue, saturation: &kSat, brightness: &kBri, alpha: nil)
     }
     
-    func start(closure: (hue: CGFloat, saturation: CGFloat, brightness: CGFloat) -> Void, menuToggle: () -> Void, finished: () -> Void) {
+    func hasForceTouch () -> Bool {
+        if #available(iOS 9, *) {
+            if parentView.traitCollection.forceTouchCapability == .Available {
+                return true
+            }
+        }
+        return false
+    }
+    
+    func conditionalHue () -> CGFloat {
+        if hasForceTouch() {
+            return kHue
+        }
+        return 0.6
+    }
+    
+    func start(closure: aClosure, menuToggle: () -> Void, finished: () -> Void) {
         
         self.menuToggle = menuToggle
         self.finished = finished
@@ -42,7 +58,7 @@ class Tutorial: NSObject {
         haloLayer.animationDuration = 1
         haloLayer.pulseInterval = 0
         
-        haloView = UIView(frame: CGRectMake(65, 65, 50, 50));
+        haloView = UIView(frame: CGRectMake(65, 65, 50, 50))
         haloLayer.position = CGPointMake(CGRectGetWidth(haloView.frame)/2, CGRectGetHeight(haloView.frame)/2)
         haloView.layer.addSublayer(haloLayer)
 
@@ -51,48 +67,77 @@ class Tutorial: NSObject {
         
         parentView.addSubview(haloView)
         
+        // down / up
         UIView.animateWithDuration(kMovementDuration, animations: { () -> Void in
             self.haloView.transform = CGAffineTransformMakeTranslation(0, self.parentView.frame.size.height - 130)
-            closure(hue: self.kHue, saturation: self.kSat, brightness: self.kBri)
-            }) { (finished: Bool) -> Void in
-                self.step1(closure)
-        }
-    }
-    
-    func step1(closure: aClosure) {
-        UIView.animateWithDuration(kMovementDuration, animations: { () -> Void in
-            self.haloView.transform = CGAffineTransformMakeTranslation(self.parentView.frame.size.width - 130, self.parentView.frame.size.height - 130)
-            closure(hue: self.kHue, saturation: self.kSat, brightness: 0.1)
+            closure(hue: 0.6, saturation: self.kSat, brightness: self.kBri)
             }, completion: { (finished: Bool) -> Void in
-                self.step2(closure)
+                if self.hasForceTouch() {
+                    return self.forceTouch(closure)
+                }
+                self.step1(closure)
         })
     }
     
+    // right
+    func step1(closure: aClosure) {
+        UIView.animateWithDuration(kMovementDuration, animations: { () -> Void in
+            self.haloView.transform = CGAffineTransformMakeTranslation(self.parentView.frame.size.width - 130, self.parentView.frame.size.height - 130)
+            closure(hue: self.conditionalHue(), saturation: self.kSat, brightness: 0.1)
+            }, completion: { (finished: Bool) -> Void in
+                self.step2(closure)
+
+        })
+    }
+    
+    // left
     func step2(closure: aClosure) {
         UIView.animateWithDuration(kMovementDuration, animations: { () -> Void in
             self.haloView.transform = CGAffineTransformMakeTranslation(0, self.parentView.frame.size.height - 130)
-            closure(hue: self.kHue, saturation: self.kSat, brightness: self.kBri)
+            closure(hue: self.conditionalHue(), saturation: self.kSat, brightness: self.kBri)
             }, completion: { (finished: Bool) -> Void in
                 self.step3(closure)
         })
     }
     
+    // right (saturation)
     func step3(closure: aClosure) {
         self.haloView.transform = CGAffineTransformIdentity
         UIView.animateWithDuration(kMovementDuration, animations: { () -> Void in
             self.haloView.transform = CGAffineTransformMakeTranslation(self.parentView.frame.size.width - 130, 0)
-            closure(hue: self.kHue, saturation: 0.1, brightness: self.kBri)
+            closure(hue: self.conditionalHue(), saturation: 0.1, brightness: self.kBri)
             }, completion: { (finished: Bool) -> Void in
                 self.step4(closure)
         })
     }
     
+    // left (saturation)
     func step4(closure: aClosure) {
+        UIView.animateWithDuration(kMovementDuration, animations: { () -> Void in
+            self.haloView.transform = CGAffineTransformIdentity
+            closure(hue: self.conditionalHue(), saturation: self.kSat, brightness: self.kBri)
+            }, completion: { (finished: Bool) -> Void in
+                self.step5(closure)
+        })
+    }
+    
+    func forceTouch(closure: aClosure) {
         UIView.animateWithDuration(kMovementDuration, animations: { () -> Void in
             self.haloView.transform = CGAffineTransformIdentity
             closure(hue: self.kHue, saturation: self.kSat, brightness: self.kBri)
             }, completion: { (finished: Bool) -> Void in
-                self.step5(closure)
+                UIView.animateWithDuration(self.kMovementDuration, animations: { () -> Void in
+                    self.haloView.transform = CGAffineTransformMakeScale(0.5, 0.5)
+                    closure(hue: self.kHue, saturation: self.kSat, brightness: 0.1)
+                    }, completion: { (finished: Bool) -> Void in
+                        UIView.animateWithDuration(self.kMovementDuration, animations: { () -> Void in
+                            self.haloView.transform = CGAffineTransformMakeScale(1.0, 1.0)
+                            closure(hue: self.kHue, saturation: self.kSat, brightness: self.kBri)
+                            }, completion: { (finished: Bool) -> Void in
+                                self.step3(closure)
+                        })
+            })
+
         })
     }
     
