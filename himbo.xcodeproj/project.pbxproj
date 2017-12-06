@@ -153,6 +153,7 @@
 			buildConfigurationList = EC1AEC821A1C6B4A00D1FA48 /* Build configuration list for PBXNativeTarget "himbo" */;
 			buildPhases = (
 				EC1AEC5F1A1C6B4A00D1FA48 /* Sources */,
+				07CB32C21FD8985A001647EE /* Bump Build Number */,
 				EC1AEC601A1C6B4A00D1FA48 /* Frameworks */,
 				EC1AEC611A1C6B4A00D1FA48 /* Resources */,
 			);
@@ -248,6 +249,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		07CB32C21FD8985A001647EE /* Bump Build Number */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Bump Build Number";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ $CONFIGURATION == Release ] || [ $CONFIGURATION == TestFlight ]; then\n    echo \"Bumping build number...\"\n    plist=${PROJECT_DIR}/${INFOPLIST_FILE}\n\n    # increment the build number (ie 115 to 116)\n    buildnum=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${plist}\")\n    if [[ \"${buildnum}\" == \"\" ]]; then\n        echo \"No build number in $plist\"\n        exit 2\n    fi\n\n    buildnum=$(expr $buildnum + 1)\n    /usr/libexec/Plistbuddy -c \"Set CFBundleVersion $buildnum\" \"${plist}\"\n    echo \"Bumped build number to $buildnum\"\nelse\n    echo $CONFIGURATION \" build - Not bumping build number.\"\nfi";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		EC1AEC5F1A1C6B4A00D1FA48 /* Sources */ = {
