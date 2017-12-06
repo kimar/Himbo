@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2A589C9F1BB793C50051FFF3 /* Exporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A589C9E1BB793C50051FFF3 /* Exporter.swift */; settings = {ASSET_TAGS = (); }; };
+		2A589C9F1BB793C50051FFF3 /* Exporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A589C9E1BB793C50051FFF3 /* Exporter.swift */; };
 		EC3F24CE1A2AAA9000C58377 /* PulsingLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC3F24CD1A2AAA9000C58377 /* PulsingLayer.swift */; };
 		EC3F24D01A2AB78E00C58377 /* Tutorial.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC3F24CF1A2AB78E00C58377 /* Tutorial.swift */; };
 		EC3F24D21A2ABF6600C58377 /* SphereMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC3F24D11A2ABF6600C58377 /* SphereMenu.swift */; };
@@ -34,6 +34,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		07EC7E731FD89578005F40DA /* himbo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = himbo.entitlements; sourceTree = "<group>"; };
 		0E981CFA1105CA64BCEAE9CD /* Pods-himbo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-himbo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-himbo/Pods-himbo.debug.xcconfig"; sourceTree = "<group>"; };
 		2A589C9E1BB793C50051FFF3 /* Exporter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Exporter.swift; sourceTree = "<group>"; };
 		49FD340327310FF0989AD5A9 /* Pods-himbo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-himbo.release.xcconfig"; path = "Pods/Target Support Files/Pods-himbo/Pods-himbo.release.xcconfig"; sourceTree = "<group>"; };
@@ -117,6 +118,7 @@
 		EC6165811A29B76B00658455 /* himbo */ = {
 			isa = PBXGroup;
 			children = (
+				07EC7E731FD89578005F40DA /* himbo.entitlements */,
 				EC6165821A29B76B00658455 /* AppDelegate.swift */,
 				EC6165891A29B76B00658455 /* ViewController.swift */,
 				2A589C9E1BB793C50051FFF3 /* Exporter.swift */,
@@ -189,15 +191,21 @@
 			attributes = {
 				LastSwiftMigration = 0700;
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0610;
+				LastUpgradeCheck = 0920;
 				ORGANIZATIONNAME = "Marcus Kida";
 				TargetAttributes = {
 					EC1AEC621A1C6B4A00D1FA48 = {
 						CreatedOnToolsVersion = 6.1;
 						DevelopmentTeam = 857XYUU5FE;
+						SystemCapabilities = {
+							com.apple.iCloud = {
+								enabled = 0;
+							};
+						};
 					};
 					EC1AEC771A1C6B4A00D1FA48 = {
 						CreatedOnToolsVersion = 6.1;
+						DevelopmentTeam = 857XYUU5FE;
 						TestTargetID = EC1AEC621A1C6B4A00D1FA48;
 					};
 				};
@@ -304,20 +312,31 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				DEVELOPMENT_TEAM = 857XYUU5FE;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -330,11 +349,11 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -347,29 +366,40 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
+				DEVELOPMENT_TEAM = 857XYUU5FE;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -379,9 +409,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = 857XYUU5FE;
 				INFOPLIST_FILE = himbo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "io.kida.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = himbo;
 			};
 			name = Debug;
@@ -390,8 +421,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 857XYUU5FE;
 				INFOPLIST_FILE = himbo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "io.kida.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = himbo;
 			};
 			name = Release;
@@ -409,6 +442,7 @@
 				);
 				INFOPLIST_FILE = himboTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "io.kida.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = himboTests;
 			};
 			name = Debug;
@@ -422,6 +456,7 @@
 				);
 				INFOPLIST_FILE = himboTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "io.kida.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = himboTests;
 			};
 			name = Release;

@@ -14,7 +14,7 @@ class ViewController: UIViewController, SphereMenuDelegate {
     
     @IBOutlet weak var flashView: UIView!
 
-    let defaults = NSUserDefaults.standardUserDefaults()
+    let defaults = UserDefaults.standard
     
     var doubleTap: UITapGestureRecognizer?
     var lastHue: CGFloat = 0.0
@@ -34,20 +34,20 @@ class ViewController: UIViewController, SphereMenuDelegate {
         super.viewDidLoad()
         exporter = Exporter(view: self.view, flashView: self.flashView)
         
-        doubleTap = UITapGestureRecognizer(target: self, action: "doubleTap:")
+        doubleTap = UITapGestureRecognizer(target: self, action: #selector(ViewController.doubleTap(gestureRecognizer:)))
         doubleTap!.numberOfTapsRequired = 2
         self.view.addGestureRecognizer(doubleTap!)
 
         let images: [UIImage] = [UIImage(named: "icon-share")!, UIImage(named: "icon-facebook")!, UIImage(named: "icon-twitter")!, UIImage(named: "icon-email")!, UIImage(named: "icon-gallery")!]
-        sphereMenu = SphereMenu(startPoint: CGPointMake(CGRectGetWidth(self.view.frame) / 2, CGRectGetHeight(self.view.frame) / 2), submenuImages: images)
+        sphereMenu = SphereMenu(startPoint: CGPoint(x: self.view.frame.width / 2, y: self.view.frame.height / 2), submenuImages: images)
         sphereMenu?.delegate = self
         self.view.addSubview(sphereMenu!)
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        if self.defaults.boolForKey("tutorial_shown") {
-            self.updateColor((hue: 0.95, saturation: 0.8, brightness: 0.9))
+        if self.defaults.bool(forKey: "tutorial_shown") {
+            self.updateColor(vals: (hue: 0.95, saturation: 0.8, brightness: 0.9))
             return;
         }
         self.showInfo();
@@ -57,8 +57,8 @@ class ViewController: UIViewController, SphereMenuDelegate {
         self.infoVisible = true
         self.infoView = nil;
         self.infoView = InfoView(text: "Start\nTutorial", parentView: self.view)
-        self.infoView?.show({ () -> Void in
-            self.defaults.setBool(true, forKey: "tutorial_shown")
+        self.infoView?.show(onHide: { () -> Void in
+            self.defaults.set(true, forKey: "tutorial_shown")
             self.infoVisible = false
             self.tutorialRunning = true
             self.tutorial()
@@ -69,21 +69,21 @@ class ViewController: UIViewController, SphereMenuDelegate {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-    override func prefersStatusBarHidden() -> Bool {
+    
+    override var prefersStatusBarHidden: Bool {
         return true
     }
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if lastTouchPoint == nil {
-            lastTouchPoint = touches.first?.locationInView(self.view)
+            lastTouchPoint = touches.first?.location(in: self.view)
         }
     }
     
-    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         if !infoVisible {
-            updateColor(colorComponents(touches))
-            lastTouchPoint = touches.first?.locationInView(self.view)
+            updateColor(vals: colorComponents(touches: touches))
+            lastTouchPoint = touches.first?.location(in: self.view)
         }
     }
     
@@ -91,22 +91,23 @@ class ViewController: UIViewController, SphereMenuDelegate {
         self.view.backgroundColor = UIColor(hue: vals.hue, saturation: vals.saturation, brightness: vals.brightness, alpha: 1.0)
     }
     
-    private func colorComponents (touches: NSSet) -> computedValues {
+    private func colorComponents (touches: Set<UITouch>) -> computedValues {
+        let touch = touches.first
+        guard let location = touch?.location(in: self.view) else {
+            return computedValues(0,0,0)
+        }
         
-        let viewHeight = CGRectGetHeight(self.view.frame)
-        let viewWidth = CGRectGetWidth(self.view.frame)
-        
-        let touch = touches.allObjects.first as! UITouch
-        let location = touch.locationInView(self.view)
-        
+        let viewHeight = self.view.frame.height
+        let viewWidth = self.view.frame.width
+
         func computeAttribute () -> CGFloat {
-            return ultimateFormula(viewWidth, y: location.x)
+            return ultimateFormula(x: viewWidth, y: location.x)
         }
 
         // Detect significant change in up/down movement (and set hue accordingly)
         if let last = lastTouchPoint {
             if fabs(location.y - last.y) > 5 && fabs(location.y - last.y) < 100 {
-                lastHue = ultimateFormula(viewHeight, y: location.y)
+                lastHue = ultimateFormula(x: viewHeight, y: location.y)
             }
         }
         
@@ -114,9 +115,9 @@ class ViewController: UIViewController, SphereMenuDelegate {
         var classic = true
         var force: CGFloat = 0.0
         if #available(iOS 9.0, *) {
-            if traitCollection.forceTouchCapability == .Available {
+            if traitCollection.forceTouchCapability == .available {
                 classic = false
-                force = (touches.allObjects.first?.force)!
+                force = (touches.first?.force)!
             }
         }
         
@@ -128,7 +129,7 @@ class ViewController: UIViewController, SphereMenuDelegate {
             }
         } else {
             lastSaturation = computeAttribute()
-            lastBrightness = ultimateFormula(viewWidth, y: force * 100)
+            lastBrightness = ultimateFormula(x: viewWidth, y: force * 100)
         }
         
         return (lastHue, lastSaturation, lastBrightness)
@@ -142,7 +143,7 @@ class ViewController: UIViewController, SphereMenuDelegate {
         return (1 / x) * (x - y)
     }
     
-    func doubleTap(gestureRecognizer: UITapGestureRecognizer) {
+    @objc func doubleTap(gestureRecognizer: UITapGestureRecognizer) {
         guard let exporter = exporter else {
             //fixme: handle non existing exporter
             return
@@ -150,7 +151,7 @@ class ViewController: UIViewController, SphereMenuDelegate {
         exporter.flashView { () -> Void in
             if let url = exporter.temporaryBackground() {
                 let activity = UIActivityViewController(activityItems: [url], applicationActivities: nil)
-                self.presentViewController(activity, animated: true, completion: nil)
+                self.present(activity, animated: true, completion: nil)
             }
         }
     }
@@ -163,8 +164,8 @@ class ViewController: UIViewController, SphereMenuDelegate {
         
     private func tutorial() {
         theTutorial = Tutorial(view: self.view)
-        theTutorial?.start({ (hue, saturation, brightness) -> Void in
-            self.updateColor((hue: hue, saturation: saturation, brightness: brightness))
+        theTutorial?.start(closure: { (hue, saturation, brightness) -> Void in
+            self.updateColor(vals: (hue: hue, saturation: saturation, brightness: brightness))
             }, menuToggle: { () -> Void in
                 self.toggleMenu()
             }, finished: { () -> Void in
@@ -186,12 +187,12 @@ class ViewController: UIViewController, SphereMenuDelegate {
         }
     }
     
-    override func canBecomeFirstResponder() -> Bool {
+    override var canBecomeFirstResponder: Bool {
         return true
     }
     
-    override func motionEnded(motion: UIEventSubtype, withEvent event: UIEvent?) {
-        if let event = event where event.subtype == UIEventSubtype.MotionShake {
+    override func motionEnded(_ motion: UIEventSubtype, with event: UIEvent?) {
+        if let event = event, event.subtype == UIEventSubtype.motionShake {
             if !infoVisible && !tutorialRunning {
                 self.showInfo()
             }

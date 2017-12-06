@@ -34,20 +34,20 @@ class InfoView: UIView {
         self.backgroundColor = UIColor.himboRed()
         self.alpha = 0.0
         
-        let width = CGRectGetWidth(parentView.frame) - (kPadding * 2)
-        let center = CGPointMake(CGRectGetWidth(self.parentView.frame)/2, CGRectGetHeight(self.parentView.frame)/2)
+        let width = parentView.frame.width - (kPadding * 2)
+        let center = CGPoint(x: self.parentView.frame.width/2, y: self.parentView.frame.height/2)
         
-        self.infoView = UIView(frame: CGRectMake(kPadding, kPadding, width, width))
-        self.infoView.backgroundColor = UIColor.whiteColor()
-        self.infoView.layer.cornerRadius = CGRectGetHeight(self.infoView.frame) / 2
+        self.infoView = UIView(frame: CGRect(x: kPadding, y: kPadding, width: width, height: width))
+        self.infoView.backgroundColor = UIColor.white
+        self.infoView.layer.cornerRadius = self.infoView.frame.height / 2
         self.infoView.center = center
         
-        self.infoLabel = UILabel(frame: CGRectMake(kInfoPadding, kInfoPadding, CGRectGetWidth(self.infoView.frame) - (kInfoPadding * 2), CGRectGetHeight(self.infoView.frame) - (kInfoPadding * 2)))
+        self.infoLabel = UILabel(frame: CGRect(x: kInfoPadding, y: kInfoPadding, width: self.infoView.frame.width - (kInfoPadding * 2), height: self.infoView.frame.height - (kInfoPadding * 2)))
         self.infoLabel.text = text
         self.infoLabel.textColor = UIColor.himboRed()
         self.infoLabel.numberOfLines = 0
-        self.infoLabel.textAlignment = NSTextAlignment.Center
-        self.infoLabel.font = UIFont.boldSystemFontOfSize(32.0)
+        self.infoLabel.textAlignment = NSTextAlignment.center
+        self.infoLabel.font = UIFont.boldSystemFont(ofSize: 32.0)
         self.infoView.addSubview(self.infoLabel)
         
         self.animator = UIDynamicAnimator(referenceView: self)
@@ -58,10 +58,10 @@ class InfoView: UIView {
         haloLayer.radius = self.infoView.frame.size.width
         haloLayer.animationDuration = 5
         haloLayer.pulseInterval = 0
-        haloLayer.position = CGPointMake(CGRectGetWidth(self.infoView.frame)/2, CGRectGetHeight(self.infoView.frame)/2)
+        haloLayer.position = CGPoint(x: self.infoView.frame.width/2, y: self.infoView.frame.height/2)
         self.infoView.layer.addSublayer(haloLayer)
         
-        self.tapGesture = UITapGestureRecognizer(target: self, action: "tap:")
+        self.tapGesture = UITapGestureRecognizer(target: self, action: #selector(InfoView.tap(tapGestureRecognizer:)))
         self.addGestureRecognizer(self.tapGesture!)
         
         self.addSubview(infoView)
@@ -75,17 +75,17 @@ class InfoView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func show(onHide: () -> Void) {
+    func show(onHide: @escaping () -> Void) {
         self.onHide = onHide;
         self.parentView.addSubview(self)
-        UIView.animateWithDuration(0.3, animations: { () -> Void in
+        UIView.animate(withDuration: 0.3, animations: { () -> Void in
             self.alpha = 1.0
         })
     }
     
     func hide() {
         self.animator.addBehavior(self.gravity)
-        UIView.animateWithDuration(0.8, animations: { () -> Void in
+        UIView.animate(withDuration: 0.8, animations: { () -> Void in
             self.alpha = 0.0
             }, completion: { (finished: Bool) -> Void in
                 self.removeFromSuperview()
@@ -93,7 +93,7 @@ class InfoView: UIView {
         })
     }
     
-    func tap(tapGestureRecognizer: UITapGestureRecognizer) {
+    @objc func tap(tapGestureRecognizer: UITapGestureRecognizer) {
         self.hide()
     }
 }

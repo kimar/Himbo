@@ -19,28 +19,30 @@ public struct Exporter {
         self.flashView = flashView
     }
     
-    func temporaryBackground() -> NSURL? {
+    func temporaryBackground() -> URL? {
         let image = self.renderedImage()
-        let path = NSTemporaryDirectory().stringByAppendingString("/himbo.png")
-        guard let imageData = UIImagePNGRepresentation(image) else {
+        let url = try? FileManager.default.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+        guard let imageData = UIImagePNGRepresentation(image),
+            let aUrl = url
+        else {
             return nil
         }
-        imageData.writeToFile(path, atomically: true)
-        return NSURL.fileURLWithPath(path)
+        try? imageData.write(to: aUrl)
+        return aUrl
     }
     
     func checkAssetsAuthorization() -> Bool {
         let status = ALAssetsLibrary.authorizationStatus()
-        if status == ALAuthorizationStatus.Denied {
-            self.view.shake(10, direction: ShakeDirection.Horizontal)
+        if status == ALAuthorizationStatus.denied {
+            self.view.shake(times: 10, direction: ShakeDirection.Horizontal)
             return false
         }
         return true
     }
     
-    public func flashView(closure: () -> Void) {
+    public func flashView(closure: @escaping () -> Void) {
         self.flashView.alpha = 1.0
-        UIView.animateWithDuration(0.3, animations: { () -> Void in
+        UIView.animate(withDuration: 0.3, animations: { () -> Void in
             self.flashView.alpha = 0.0
             }, completion: { (completed: Bool) -> Void in
                 closure()
@@ -50,29 +52,29 @@ public struct Exporter {
     public func saveToLibrary() {
         self.flashView { () -> Void in
             let image = self.renderedImage()
-            ALAssetsLibrary().writeImageToSavedPhotosAlbum(image.CGImage, orientation: ALAssetOrientation.Up) { (path: NSURL!, error: NSError!) -> Void in
+            ALAssetsLibrary().writeImage(toSavedPhotosAlbum: image.cgImage, orientation: .up, completionBlock: { (url, error) in
                 if error != nil {
                     UIAlertView(title: "Error", message: "The Photo could not be saved.", delegate: nil, cancelButtonTitle: "OK").show()
                 }
-            }
+            })
         }
     }
     
     func renderedImage() -> UIImage {
-        let bounds = UIScreen.mainScreen().bounds
-        let scale = UIScreen.mainScreen().scale
-        let size = CGSizeMake(bounds.width * scale, CGRectGetHeight(bounds) * scale)
-        let rect = CGRectMake(0, 0, size.width, size.height)
-        return self.imageWithColor(rect, color: self.view.backgroundColor!)
+        let bounds = UIScreen.main.bounds
+        let scale = UIScreen.main.scale
+        let size = CGSize(width: bounds.width * scale, height: bounds.height * scale)
+        let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
+        return self.imageWithColor(rect: rect, color: self.view.backgroundColor!)
     }
     
     func imageWithColor(rect: CGRect, color: UIColor) -> UIImage {
         UIGraphicsBeginImageContext(rect.size)
         let ctx = UIGraphicsGetCurrentContext()
-        CGContextSetFillColorWithColor(ctx, color.CGColor)
-        CGContextFillRect(ctx, rect)
+        ctx!.setFillColor(color.cgColor)
+        ctx!.fill(rect)
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-        return image
+        return image!
     }
 }
