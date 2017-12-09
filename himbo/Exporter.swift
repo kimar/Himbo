@@ -21,7 +21,7 @@ public struct Exporter {
     
     func temporaryBackground() -> URL? {
         let image = self.renderedImage()
-        let url = try? FileManager.default.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+        let url = try? FileManager.default.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: true).appendingPathComponent("himbo.png")
         guard let imageData = UIImagePNGRepresentation(image),
             let aUrl = url
         else {
